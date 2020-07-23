@@ -25,7 +25,7 @@ SECRET_KEY = 'a5^%lu3k#i6_#z!npk@$ft(6z-o6m(%t-=b8)l+k4q2%#r4+yi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dsrivastava565.pythonanywhere.com']
 
 LANGUAGE_CODE = 'en-us'
 
@@ -99,10 +99,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'HOST': 'dsrivastava565.mysql.pythonanywhere-services.com',
+        'HOST': '127.0.0.1',
         'NAME': 'quizapp',
-        'USER': 'dsrivastava565',
-        'PASSWORD': 'Satyam123',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'PORT': '3306',
     },
 }
