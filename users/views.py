@@ -92,6 +92,6 @@ class CreateQuizQuestions(generics.GenericAPIView):
     			serializer.save()	
     		return Response({'status': 'Successfully Created'}, status=201)
 
-    
+# def QuizListApi(gene)
 
 
