@@ -25,7 +25,7 @@ SECRET_KEY = 'a5^%lu3k#i6_#z!npk@$ft(6z-o6m(%t-=b8)l+k4q2%#r4+yi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['dsrivastava565.pythonanywhere.com']
+ALLOWED_HOSTS = ['dsrivastava565.pythonanywhere.com','*']
 
 LANGUAGE_CODE = 'en-us'
 
@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework.authtoken',
     'djoser',
+    'corsheaders',
     'allauth',
     'knox',
     'rest_auth.registration',
@@ -65,10 +66,14 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+CORS_ORIGIN_ALLOW_ALL = True # If this is used then `CORS_ORIGIN_WHITELIST` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'quizapp.urls'
 
@@ -98,11 +103,12 @@ DATABASES = {
     
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'HOST': 'dsrivastava565.mysql.pythonanywhere-services.com',
-        'NAME': 'dsrivastava565$quizapp',
-        'USER': 'dsrivastava565',
-        'PASSWORD': 'Devesh@123',
-        
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'HOST': '127.0.0.1',
+        'NAME': 'quizapp',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'PORT': '3306',
     },
 }
 REST_FRAMEWORK = {

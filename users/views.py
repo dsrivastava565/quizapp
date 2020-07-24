@@ -52,12 +52,13 @@ class QuestionAPIView(APIView):
 			return Response(data, status=201)
 
 
-class UserAPI(generics.RetrieveAPIView):
+class UserAPI(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated,]
     serializer_class = serializers.UserSerializer()
-
-    def get_object(self):
-        return self.request.user
+    def get(self, request):
+    	queryset = models.CustomUser.objects.filter(id =request.user.id).values()
+    	
+    	return Response(queryset,status=200,content_type="application/json")
 
 class GETQuestions(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated,]
