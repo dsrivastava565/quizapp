@@ -18,7 +18,9 @@ class UserListView(generics.ListAPIView):
 class RegisterAPI(generics.GenericAPIView):
     serializer_class = RegisterSerializer
 
+
     def post(self, request, *args, **kwargs):
+        
         serializer = RegisterSerializer(data = request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
@@ -35,6 +37,8 @@ class LoginAPI(KnoxLoginView):
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         login(request, user)
+        data = [{'auth':request,'user':user}]
+        print(request);
         return super(LoginAPI, self).post(request, format=None)
 
 class QuestionAPIView(APIView):
@@ -57,8 +61,8 @@ class UserAPI(generics.ListAPIView):
     serializer_class = serializers.UserSerializer()
     def get(self, request):
     	queryset = models.CustomUser.objects.filter(id =request.user.id).values()
-    	
-    	return Response(queryset,status=200,content_type="application/json")
+    	data = {'currentuser': queryset[0]}
+    	return Response(data,status=200,content_type="application/json")
 
 class GETQuestions(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated,]

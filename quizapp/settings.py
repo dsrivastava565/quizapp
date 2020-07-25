@@ -65,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -118,7 +118,7 @@ DATABASES = {
         'USER': 'dsrivastava565',
         'PASSWORD': 'Devesh@123',
         'PORT': '3306',
-    },
+    }
 }
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
