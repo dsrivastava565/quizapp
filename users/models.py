@@ -22,9 +22,9 @@ class Questions(models.Model):
 class Quiz(models.Model):
     AddedBy = models.ForeignKey(CustomUser, blank = True,null = True,on_delete=models.CASCADE)
     Name =models.TextField(max_length=600)
-    Duration = models.IntegerField(default=0)
-    max_marks = models.IntegerField()
-    total_questions = models.IntegerField()
+    TimeDuration = models.IntegerField(default=0)
+    max_marks = models.IntegerField(default=0)
+    total_questions = models.IntegerField(default=0)
     def __str__(self):
         return self.Name
 
