@@ -114,7 +114,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         'HOST': 'dsrivastava565.mysql.pythonanywhere-services.com',
-        'NAME': 'dsrivastava565$quizapp',
+        'NAME': 'dsrivastava565$quizapplatest',
         'USER': 'dsrivastava565',
         'PASSWORD': 'Devesh@123',
         'PORT': '3306',
