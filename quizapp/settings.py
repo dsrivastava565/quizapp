@@ -101,24 +101,24 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 DATABASES = {
     
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #     'HOST': '127.0.0.1',
-    #     'NAME': 'quizapp',
-    #     'USER': 'root',
-    #     'PASSWORD': 'root',
-    #     'PORT': '3306',
-    # },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        'HOST': 'dsrivastava565.mysql.pythonanywhere-services.com',
-        'NAME': 'dsrivastava565$quizapp',
-        'USER': 'dsrivastava565',
-        'PASSWORD': 'Devesh@123',
+        'HOST': '127.0.0.1',
+        'NAME': 'quizapp',
+        'USER': 'root',
+        'PASSWORD': 'root',
         'PORT': '3306',
-    }
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #     'HOST': 'dsrivastava565.mysql.pythonanywhere-services.com',
+    #     'NAME': 'dsrivastava565$quizapp',
+    #     'USER': 'dsrivastava565',
+    #     'PASSWORD': 'Devesh@123',
+    #     'PORT': '3306',
+    # }
 }
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,

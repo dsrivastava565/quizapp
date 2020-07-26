@@ -52,7 +52,7 @@ class QuestionAPIView(APIView):
 			serializer.save()
 			return Response(serializer.data, status=201)
 		else:
-			data = [{'status': 'unauthorized'}]
+			data = [{'error': 'unauthorized'}]
 			return Response(data, status=201)
 
 
