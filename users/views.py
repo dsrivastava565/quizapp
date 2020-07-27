@@ -10,7 +10,7 @@ from rest_framework import permissions
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from knox.views import LoginView as KnoxLoginView
 from knox.models import AuthToken
-
+from django.contrib.auth import get_user_model
 class UserListView(generics.ListAPIView):
     queryset = models.CustomUser.objects.all()
     serializer_class = serializers.UserSerializer
@@ -24,6 +24,8 @@ class RegisterAPI(generics.GenericAPIView):
         serializer = RegisterSerializer(data = request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
+        # User = get_user_model()
+        query = models.CustomUser.objects.filter(id=user.id).update(usertype=request.data['usertype'])
         return Response({
         "user": serializer.data,
         "token": AuthToken.objects.create(user)[1]
@@ -116,7 +118,7 @@ class GETQuizQuestions(generics.ListAPIView):
             query = list(models.Questions.objects.filter(id=qid['question']).values('id','question','option1','option2','option3','option4'))
             
             data.append(query[0])        
-        return Response({'data': data,'quizid':id}, status=201)
+        return Response({'data': data,'quizid':id}, status=200)
 
 
 class SubmitQuiz(generics.ListAPIView):
@@ -139,3 +141,14 @@ class SubmitQuiz(generics.ListAPIView):
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response({'correctans': correctans,'total_marks_obtained':total_obtain_marks}, status=201)
+
+
+class GETQuizResults(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated,]
+    def get(self, request):
+        if(request.user.is_authenticated):
+            results = []
+            queryset =  list(models.QuizSubmission.objects.filter(SubmittedBy=request.user.id).values('quiz__Name','quiz__max_marks','total_marks_obtained','quiz__total_questions','total_correct'))
+            for q in queryset:
+                results.append(q)
+            return Response({'results':results},status=200)

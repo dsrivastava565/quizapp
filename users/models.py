@@ -4,6 +4,7 @@ from django.db import models
 class CustomUser(AbstractUser):
     name = models.CharField(blank=True, max_length=255)
     address = models.CharField(blank=True,max_length=255)
+    usertype = models.CharField(max_length=600,blank=True)
     
     def __str__(self):
         return self.email
