@@ -15,4 +15,7 @@ urlpatterns = [
     path('getquestions', views.GETQuestions.as_view()),
     path('createquiz', views.CreateQuiz.as_view()),
     path('createquizquestions', views.CreateQuizQuestions.as_view()),
+    path('getquizs', views.GETQuizs.as_view()),
+    path('getquizquestions',views.GETQuizQuestions.as_view()),
+    path('submitquiz',views.SubmitQuiz.as_view())
 ]

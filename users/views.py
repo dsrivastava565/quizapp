@@ -97,6 +97,45 @@ class CreateQuizQuestions(generics.GenericAPIView):
     			serializer.save()	
     		return Response({'status': 'Successfully Created'}, status=201)
 
-# def QuizListApi(gene)
+class GETQuizs(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated,]
+    queryset = models.Quiz.objects.all()
+    serializer_class = serializers.QuizSerializer
 
 
+class GETQuizQuestions(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated,]
+    def get(self, request):
+        id = request.GET.get('id','')
+        # print(id)
+        queryset = list(models.QuizQuestions.objects.filter(quiz__id=id).values('id','question'))
+        data = []
+        responsedata = [{'quizid':id}]
+        for qid in queryset:
+            # print(qid['question'])
+            query = list(models.Questions.objects.filter(id=qid['question']).values('id','question','option1','option2','option3','option4'))
+            
+            data.append(query[0])        
+        return Response({'data': data,'quizid':id}, status=201)
+
+
+class SubmitQuiz(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated,]
+    def post(self, request):
+        if(request.user.is_authenticated):
+            data = request.data
+            quizid = data['quizid']
+            response = data['response']
+            correctans=0;
+            for res in response:
+                query = list(models.Questions.objects.filter(id=res['questionid']).values('answer'));
+                if query[0]['answer']==res['question_ans']:
+                    correctans+=1;
+            queryquiz = list(models.Quiz.objects.filter(id=quizid).values('max_marks','total_questions'))
+            eachquestionmark = queryquiz[0]['max_marks']/queryquiz[0]['total_questions']
+            total_obtain_marks = eachquestionmark*correctans
+            savedata = {'quiz':quizid,'SubmittedBy':request.user.id,'total_correct':correctans,'total_marks_obtained':total_obtain_marks}
+            serializer = serializers.QuizSubmissionSerializer(data=savedata)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            return Response({'correctans': correctans,'total_marks_obtained':total_obtain_marks}, status=201)

@@ -26,6 +26,10 @@ class QuizquestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.QuizQuestions
         fields = '__all__'
+class QuizSubmissionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.QuizSubmission
+        fields = '__all__'
 
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:

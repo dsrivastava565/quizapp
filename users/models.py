@@ -34,4 +34,13 @@ class QuizQuestions(models.Model):
 
     def __str__(self):
         return self.quiz
+
+
+class QuizSubmission(models.Model):
+    quiz = models.ForeignKey(Quiz, blank = True,null = True,on_delete=models.CASCADE)
+    SubmittedBy = models.ForeignKey(CustomUser, blank = True,null = True,on_delete=models.CASCADE)
+    total_correct =  models.IntegerField(default=0)
+    total_marks_obtained = models.IntegerField(default=0)
+    def __str__(self):
+        return self.quiz
 		
